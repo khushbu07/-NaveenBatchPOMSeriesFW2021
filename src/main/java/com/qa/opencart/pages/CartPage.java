@@ -4,7 +4,9 @@ public class CartPage {
 
 	public static void main(String[] args) {
 
-System.out.println("I am in feature branch f");
+     System.out.println("I am in feature branch f");
+     System.out.println("I am in feature branch f2");
+     
 	}
 
 }
