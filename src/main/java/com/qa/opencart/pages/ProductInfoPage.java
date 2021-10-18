@@ -65,7 +65,7 @@ public class ProductInfoPage {
 
 		List<WebElement> metaPriceList = elementUtil.getElements(prodpriceData);
 		String actPrice=metaPriceList.get(0).getText().trim();
-		String extTaxPrice=metaPriceList.get(0).getText().trim();
+		String extTaxPrice=metaPriceList.get(1).getText().trim();
 		prodMap.put("price", actPrice);
 		prodMap.put("ExTaxPrice", extTaxPrice.split(":")[1].trim());
 
