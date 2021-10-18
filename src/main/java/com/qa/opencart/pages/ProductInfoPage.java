@@ -21,7 +21,7 @@ public class ProductInfoPage {
 	private By quantity = By.id("input-quantity");
 	private By addToCartBtn = By.id("button-cart");
 	private By prodMetaData = By.xpath("(//div[@id='content']//ul[@class='list-unstyled'])[position()=1]/li");
-	private By prodpriceData = By.xpath("(//div[@id='content']//ul[@class='list-unstyled'])[position()=2]");
+	private By prodpriceData = By.xpath("(//div[@id='content']//ul[@class='list-unstyled'])[position()=2]/li");
 
 	public ProductInfoPage(WebDriver driver) {
 		this.driver = driver;
