@@ -49,6 +49,7 @@ public class ProductInfoTest extends BaseTest {
 		resultPage = accPage.doSearch("macbook");
 		System.out.println("productMetaListTest running....by me");
 		System.out.println("productMetaListTest running....by me");
+		System.out.println("productMetaListTest running....by me");
 		productInfoPage = resultPage.selectProduct("MacBook Pro");
 		Map<String,String> actProdMap=productInfoPage.getProductMetaData();
 		actProdMap.forEach((k,v)->System.out.println(k +":" + v));
