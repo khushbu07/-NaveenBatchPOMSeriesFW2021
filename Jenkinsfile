@@ -1,49 +1,57 @@
-pipeline{
+pipeline 
+{
     agent any
-    stages{
-        stage("Build"){
-            steps{
-                echo("building the project")
+    
+    tools{
+    	maven 'maven'
+        }
+
+    stages 
+    {
+        stage('Build') 
+        {
+            steps 
+            {
+                 git 'https://github.com/jglick/simple-maven-project-with-tests.git'
+                 bat "mvn -Dmaven.test.failure.ignore=true clean package"
             }
-            
+            post 
+            {
+                success 
+                {
+                    junit '**/target/surefire-reports/TEST-*.xml'
+                    archiveArtifacts 'target/*.jar'
+                }
+            }
         }
         
-        stage("Run UTs"){
-            steps{
-                echo("Run UTs")
+        
+        stage('Regression Automation Test') {
+            steps {
+                catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                    git 'https://github.com/khushbu07/-NaveenBatchPOMSeriesFW2021'
+                    bat "mvn clean install"
+                }
             }
-            
         }
-        stage("Deploy on Dev"){
-            steps{
-                echo("Deploy on Dev")
+                
+     
+        stage('Publish Allure Reports') {
+           steps {
+                script {
+                    allure([
+                        includeProperties: false,
+                        jdk: '',
+                        properties: [],
+                        reportBuildPolicy: 'ALWAYS',
+                        results: [[path: '/allure-results']]
+                    ])
+                }
             }
-            
-        }
-        stage("Deploy on QA"){
-            steps{
-                echo("Deploy on QA")
-            }
-            
-        }
-        stage("sanity TC execution"){
-            steps{
-                echo("sanity TC execution")
-            }
-            
-        }
-        stage("Regression TC execution"){
-            steps{
-                echo("Regression TC execution")
-            }
-            
         }
         
-        stage("Deploy on Stage"){
-            steps{
-                echo("Deploy on Stage")
-            }
-            
+        
+       
         }
     }
 }
